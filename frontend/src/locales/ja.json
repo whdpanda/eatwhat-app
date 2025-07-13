@@ -1,0 +1,11 @@
+{
+  "title": "何を食べるレコメンダー",
+  "distance": "距離範囲",
+  "budget": "予算上限",
+  "random": "ランダム",
+  "loading": "検索中...",
+  "score": "評価",
+  "type": "タイプ",
+  "address": "住所",
+  "detail": "詳細"
+}

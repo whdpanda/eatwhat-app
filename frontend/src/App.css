@@ -87,6 +87,11 @@ select:focus {
   box-shadow: 0 3px 14px 0 rgba(249, 130, 77, 0.13);
 }
 
+.lang-switch:hover {
+  background: #f9f9f9;
+  border-color: #aaa;
+}
+
 .restaurant-item b {
   color: #f87c46;
   font-size: 1.13rem;
@@ -110,6 +115,59 @@ select:focus {
   text-align: center;
   letter-spacing: 0.04em;
 }
+/* 语言切换下拉菜单样式 */
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border: 1px solid #b5b5b5;
+  border-radius: 7px;
+  background: #fff;
+  font-size: 15px;
+  min-width: 60px;
+  cursor: pointer;
+  user-select: none;
+  font-weight: 500;
+  transition: box-shadow .18s, border-color .18s;
+  margin-right: 8px;
+}
+.lang-switch.open {
+  box-shadow: 0 2px 10px #f3e9e0;
+}
+
+.lang-switch-arrow {
+  margin-left: 4px;
+  font-size: 13px;
+  line-height: 0;
+}
+
+.lang-menu {
+  position: absolute;
+  right: 0;
+  top: 28px;
+  background: #fff;
+  border: 1px solid #b5b5b5;
+  border-radius: 10px;
+  min-width: 70px;
+  box-shadow: 0 2px 16px #eed;
+  z-index: 100;
+}
+.lang-menu-item {
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 7px;
+  font-size: 15px;
+  font-weight: 400;
+  transition: background .12s;
+}
+.lang-menu-item.active {
+  background: #f8f8f8;
+  font-weight: 700;
+}
+.lang-menu-item:hover {
+  background: #f1ecec;
+}
+
 
 @media (max-width: 600px) {
   .app-container {

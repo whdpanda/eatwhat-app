@@ -1,0 +1,11 @@
+{
+  "title": "吃什么推荐器",
+  "distance": "位置范围",
+  "budget": "预算上限",
+  "random": "随机推荐",
+  "loading": "查询中...",
+  "score": "评分",
+  "type": "类型",
+  "address": "地址",
+  "detail": "详情"
+}

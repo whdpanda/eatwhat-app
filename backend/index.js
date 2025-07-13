@@ -5,7 +5,6 @@ require('dotenv').config();
 
 const app = express();
 const PORT = 8080;
-// const PORT = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.json());
@@ -17,11 +16,12 @@ app.use(express.json());
  */
 function getPriceLevel(budget) {
   if (budget < 0) return undefined;
-  if (budget <= 500) return 0;
-  if (budget <= 1000) return 1;
-  if (budget <= 1500) return 2;
-  if (budget <= 2000) return 3;
-  return 4;
+  if (budget <= 1000) return 0;
+  if (budget <= 2000) return 1;
+  if (budget <= 3000) return 2;
+  if (budget <= 5000) return 3;
+  if (budget <= 10000) return 4;
+  return 5;
 }
 
 app.post('/api/random-restaurants', async (req, res) => {
@@ -70,10 +70,6 @@ app.post('/api/random-restaurants', async (req, res) => {
     console.error(e);
     res.status(500).json({ error: 'API 请求失败' });
   }
-});
-
-app.get('/', (req, res) => {
-  res.status(200).send('ok');
 });
 
 app.listen(PORT, () => {

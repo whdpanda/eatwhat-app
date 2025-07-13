@@ -1,0 +1,11 @@
+{
+  "title": "What To Eat Recommender",
+  "distance": "Distance Range",
+  "budget": "Budget Limit",
+  "random": "Random",
+  "loading": "Loading...",
+  "score": "Rating",
+  "type": "Type",
+  "address": "Address",
+  "detail": "Detail"
+}
