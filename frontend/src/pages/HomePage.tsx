@@ -8,8 +8,8 @@ export default function HomePage() {
   const [loading, setLoading] = useState(false);
 
   return (
-    <>
-      <h1 style={{ marginTop: 30 }}>{/* 由 App.tsx 控制i18n */}</h1>
+    <div>
+      {/* 这里不需要再渲染 <h1>，主标题交给App.tsx或Header.tsx统一管理 */}
       <RestaurantSearchForm
         onResult={setRestaurants}
         onError={setError}
@@ -20,6 +20,6 @@ export default function HomePage() {
         error={error}
         loading={loading}
       />
-    </>
+    </div>
   );
 }

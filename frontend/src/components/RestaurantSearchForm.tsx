@@ -36,8 +36,9 @@ export default function RestaurantSearchForm({ onResult, onError, setLoading }: 
   const [distance, setDistance] = React.useState(1000);
   const [price, setPrice] = React.useState(-1);
 
-//   const API_URL = 'https://eatwhat-backend-env.eba-k3yp4mmj.ap-southeast-2.elasticbeanstalk.com';
-  const API_URL = 'http://localhost:8080'; // 本地开发时使用
+  // const API_URL = 'https://eatwhat-backend-env.eba-k3yp4mmj.ap-southeast-2.elasticbeanstalk.com';
+  const API_URL = 'https://api.randomeatwhat.com';
+//   const API_URL = 'http://localhost:8080'; // 本地开发时使用
 
   function getLocation(): Promise<{ lat: number, lng: number }> {
     return new Promise((resolve, reject) => {

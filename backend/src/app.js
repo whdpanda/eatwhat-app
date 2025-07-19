@@ -12,6 +12,10 @@ app.use(express.json());
 app.use('/api', restaurantRoutes);
 
 const PORT = process.env.PORT || 8080;
+app.get('/', (req, res) => {
+  res.status(200).send('OK');
+});
+
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);
 });
