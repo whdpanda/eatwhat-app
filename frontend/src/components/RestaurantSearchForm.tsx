@@ -1,20 +1,20 @@
-import React from 'react';
-import { useTranslation } from 'react-i18next';
+import React from "react";
+import { useTranslation } from "react-i18next";
 
 const DISTANCE_OPTIONS = [
-  { label: '1km', value: 1000 },
-  { label: '3km', value: 3000 },
-  { label: '5km', value: 5000 },
-  { label: '10km', value: 10000 },
+  { label: "1km", value: 1000 },
+  { label: "3km", value: 3000 },
+  { label: "5km", value: 5000 },
+  { label: "10km", value: 10000 },
 ];
 
 const PRICE_OPTIONS = [
-  { label: '', value: -1 },
-  { label: '¥1000', value: 1000 },
-  { label: '¥2000', value: 2000 },
-  { label: '¥3000', value: 3000 },
-  { label: '¥5000', value: 5000 },
-  { label: '¥10000', value: 10000 },
+  { label: "", value: -1 },
+  { label: "¥1000", value: 1000 },
+  { label: "¥2000", value: 2000 },
+  { label: "¥3000", value: 3000 },
+  { label: "¥5000", value: 5000 },
+  { label: "¥10000", value: 10000 },
 ];
 
 export type Restaurant = {
@@ -31,18 +31,22 @@ type Props = {
   setLoading: (b: boolean) => void;
 };
 
-export default function RestaurantSearchForm({ onResult, onError, setLoading }: Props) {
+export default function RestaurantSearchForm({
+  onResult,
+  onError,
+  setLoading,
+}: Props) {
   const { t } = useTranslation();
   const [distance, setDistance] = React.useState(1000);
   const [price, setPrice] = React.useState(-1);
 
-  const API_URL = 'https://api.randomeatwhat.com';
-//   const API_URL = 'http://localhost:8080'; // 本地开发时使用
+  const API_URL = "https://api.randomeatwhat.com";
+  //   const API_URL = 'http://localhost:8080'; // 本地开发时使用
 
-  function getLocation(): Promise<{ lat: number, lng: number }> {
+  function getLocation(): Promise<{ lat: number; lng: number }> {
     return new Promise((resolve, reject) => {
       if (!navigator.geolocation) {
-        reject(new Error('无法获取定位'));
+        reject(new Error("无法获取定位"));
       } else {
         navigator.geolocation.getCurrentPosition(
           (pos) => {
@@ -51,7 +55,7 @@ export default function RestaurantSearchForm({ onResult, onError, setLoading }: 
               lng: pos.coords.longitude,
             });
           },
-          (err) => reject(new Error('定位失败'))
+          (err) => reject(new Error("定位失败"))
         );
       }
     });
@@ -60,13 +64,13 @@ export default function RestaurantSearchForm({ onResult, onError, setLoading }: 
   async function handleRandom(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
-    onError('');
+    onError("");
     onResult([]);
     try {
       const { lat, lng } = await getLocation();
       const res = await fetch(`${API_URL}/api/random-restaurants`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           latitude: lat,
           longitude: lng,
@@ -74,43 +78,49 @@ export default function RestaurantSearchForm({ onResult, onError, setLoading }: 
           price,
         }),
       });
-      if (!res.ok) throw new Error('API请求失败');
+      if (!res.ok) throw new Error("API请求失败");
       const data = await res.json();
       onResult(data.restaurants);
     } catch (e: any) {
-      onError(e.message || '发生未知错误');
+      onError(e.message || "发生未知错误");
     }
     setLoading(false);
   }
 
   return (
-    <form onSubmit={handleRandom}>
-      <div style={{ marginBottom: 22 }}>
+    <form className="restaurant-form" onSubmit={handleRandom}>
+      <div className="form-item">
         <label>
-          {t('distance')}:
-          <select value={distance} onChange={e => setDistance(Number(e.target.value))}>
-            {DISTANCE_OPTIONS.map(opt =>
-              <option key={opt.value} value={opt.value}>{opt.label}</option>
-            )}
+          {t("distance")}:
+          <select
+            value={distance}
+            onChange={(e) => setDistance(Number(e.target.value))}
+          >
+            {DISTANCE_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
           </select>
         </label>
       </div>
-      <div style={{ marginBottom: 22 }}>
+      <div className="form-item">
         <label>
-          {t('budget')}:
-          <select value={price} onChange={e => setPrice(Number(e.target.value))}>
-            {PRICE_OPTIONS.map(opt =>
-              <option key={opt.value} value={opt.value}>{opt.label}</option>
-            )}
+          {t("budget")}:
+          <select
+            value={price}
+            onChange={(e) => setPrice(Number(e.target.value))}
+          >
+            {PRICE_OPTIONS.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
           </select>
         </label>
       </div>
-      <button
-        type="submit"
-        className="button-main"
-        style={{ marginTop: 10 }}
-      >
-        {t('random')}
+      <button type="submit" className="button-main form-button">
+        {t("random")}
       </button>
     </form>
   );

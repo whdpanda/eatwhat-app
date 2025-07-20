@@ -2,7 +2,7 @@
 body {
   background: linear-gradient(120deg, #ffe8d2 0%, #ffe4ec 100%);
   min-height: 100vh;
-  font-family: 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+  font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
 }
 
 .app-container {
@@ -51,34 +51,37 @@ select:focus {
 }
 
 .button-main {
-  margin-top: 10px;
+  flex: 1 1 0;
+  border-radius: 30px;       /* 左右都是圆角 */
   background: linear-gradient(90deg, #fda085 0%, #f6d365 100%);
   color: #fff;
   border: none;
-  border-radius: 30px;
-  padding: 10px 38px;
+  padding: 10px 0;
   font-size: 1.08rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   cursor: pointer;
   box-shadow: 0 3px 12px 0 rgba(249, 130, 77, 0.12);
   transition: background 0.3s, box-shadow 0.2s, transform 0.13s;
+  min-width: 200px;
 }
-
-.button-main:active {
-  transform: scale(0.98);
-  box-shadow: 0 2px 6px 0 rgba(249, 130, 77, 0.16);
-}
-
 .button-main:disabled {
-  background: #ffecd6;
-  color: #c3a984;
+  background: #ffd6a0;
   cursor: not-allowed;
-  box-shadow: none;
 }
 
 .restaurant-list {
   margin-top: 30px;
+}
+
+.restaurant-form .form-item {
+  margin-bottom: 22px;
+}
+
+/* 推荐按钮间距更大一些 */
+.restaurant-form .form-button {
+  margin-top: 36px;   /* 或32px，效果更松快 */
+  display: block;
 }
 
 .restaurant-item {
@@ -150,7 +153,7 @@ select:focus {
 
 .lang-menu {
   position: absolute;
-  left: 0;    /* 让下拉正好对齐按钮 */
+  left: 0; /* 让下拉正好对齐按钮 */
   top: 28px;
   background: #fff;
   border: 1px solid #b5b5b5;
@@ -165,7 +168,7 @@ select:focus {
   border-radius: 7px;
   font-size: 15px;
   font-weight: 400;
-  transition: background .12s;
+  transition: background 0.12s;
 }
 .lang-menu-item:hover {
   background: #f1ecec;
@@ -178,7 +181,7 @@ select:focus {
 }
 
 .app-header {
-  position: fixed;   /* 或 relative */
+  position: fixed; /* 或 relative */
   top: 24px;
   right: 28px;
   display: flex;
@@ -240,9 +243,9 @@ select:focus {
   padding: 6px 18px;
   font-size: 20px;
   border-radius: 7px;
-  background: transparent;   /* 透明 */
-  border: none;              /* 无边框 */
-  font-weight: 700;          /* 可选：加粗 */
+  background: transparent; /* 透明 */
+  border: none; /* 无边框 */
+  font-weight: 700; /* 可选：加粗 */
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -250,7 +253,7 @@ select:focus {
 }
 
 .user-menu-trigger-plain:hover {
-  background: #f6f6f6;       /* 可选：hover微微高亮 */
+  background: #f6f6f6; /* 可选：hover微微高亮 */
 }
 
 /* App.css */
@@ -333,8 +336,69 @@ select:focus {
   margin-left: 4px;
 }
 
+.back-link-row {
+  text-align: right;
+  margin-bottom: 6px;
+}
+.back-link {
+  color: #2563eb;
+  font-size: 15px;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+}
 
+.captcha-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
 
+.captcha-code {
+  font-weight: bold;
+  letter-spacing: 6px;
+  font-size: 1.13em;
+  user-select: none;
+  padding: 6px 14px;
+  background: #fff0df;
+  border-radius: 7px;
+  cursor: pointer;
+  border: 1.5px dashed #fda085;
+  transition: background 0.2s;
+}
+.captcha-code:hover {
+  background: #ffe0b7;
+}
+
+.captcha-input {
+  flex: 1;
+  padding: 8px 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 7px;
+  outline: none;
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.login-field {
+  margin-bottom: 18px;
+}
+
+.login-input {
+  width: 100%;
+  font-size: 16px;
+  padding: 8px 10px;
+  border-radius: 7px;
+  border: 1px solid #ccc;
+  outline: none;
+}
 
 @media (max-width: 600px) {
   .app-container {
@@ -342,4 +406,3 @@ select:focus {
     margin: 24px 0;
   }
 }
-
