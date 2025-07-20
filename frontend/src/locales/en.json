@@ -8,7 +8,7 @@
   "type": "Type",
   "address": "Address",
   "detail": "Detail",
-   "login": "Login",
+  "login": "Login",
   "logout": "Logout",
   "login_title": "User Login",
   "login_username": "Username",
