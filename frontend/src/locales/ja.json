@@ -7,5 +7,11 @@
   "score": "評価",
   "type": "タイプ",
   "address": "住所",
-  "detail": "詳細"
+  "detail": "詳細",
+  "login": "ログイン",
+  "logout": "ログアウト",
+  "login_title": "ユーザーログイン",
+  "login_username": "ユーザー名",
+  "login_password": "パスワード",
+  "login_required": "ユーザー名とパスワードを入力してください"
 }

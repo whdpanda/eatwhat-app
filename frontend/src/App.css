@@ -119,21 +119,18 @@ select:focus {
 .lang-switch {
   display: inline-flex;
   align-items: center;
+  position: relative;
   padding: 2px 10px;
   border: 1px solid #b5b5b5;
   border-radius: 7px;
   background: #fff;
   font-size: 15px;
-  min-width: 60px;
+  min-width: 70px;
   cursor: pointer;
   user-select: none;
   font-weight: 500;
-  transition: box-shadow .18s, border-color .18s;
-  margin-right: 8px;
-  position: relative;
-  top: -25px;   /* 向上移动 25px */
-  left: -35px;  /* 向左移动 35px */
 }
+
 .lang-switch.open {
   box-shadow: 0 2px 10px #f3e9e0;
 }
@@ -146,7 +143,7 @@ select:focus {
 
 .lang-menu {
   position: absolute;
-  right: 0;
+  left: 0;    /* 让下拉正好对齐按钮 */
   top: 28px;
   background: #fff;
   border: 1px solid #b5b5b5;
@@ -171,17 +168,24 @@ select:focus {
   background: #f1ecec;
 }
 
+.lang-switcher-root {
+  display: inline-flex;
+  position: relative;
+  align-items: center;
+}
+
 .app-header {
-  position: absolute;
+  position: fixed;   /* 或 relative */
   top: 24px;
   right: 28px;
   display: flex;
   align-items: center;
   z-index: 100;
+  gap: 16px;
+  background: transparent;
 }
 
 .login-btn {
-  margin-left: 16px;
   padding: 6px 18px;
   font-size: 15px;
   border-radius: 7px;
@@ -191,11 +195,77 @@ select:focus {
   cursor: pointer;
   transition: background 0.18s, border-color 0.18s;
 }
+
 .login-btn:hover {
   background: #fff4e7;
   border-color: #f87c46;
 }
 
+.user-menu-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.user-menu-trigger {
+  padding: 6px 18px;
+  border: 1px solid #ffb482;
+  border-radius: 7px;
+  background: #fff;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background 0.18s, border-color 0.18s;
+}
+.user-menu-arrow {
+  margin-left: 6px;
+  font-size: 13px;
+}
+.user-menu-trigger:hover {
+  background: #fff4e7;
+  border-color: #f87c46;
+}
+
+.user-menu-dropdown {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  min-width: 100px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px #f3e9e0;
+  z-index: 999;
+}
+.user-menu-item {
+  padding: 10px 16px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background 0.12s;
+}
+.user-menu-item:hover {
+  background: #f1ecec;
+}
+
+/* 用户名按钮：无边框无背景 */
+.user-menu-trigger-plain {
+  padding: 6px 18px;
+  font-size: 20px;
+  border-radius: 7px;
+  background: transparent;   /* 透明 */
+  border: none;              /* 无边框 */
+  font-weight: 700;          /* 可选：加粗 */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: background 0.18s;
+}
+
+.user-menu-trigger-plain:hover {
+  background: #f6f6f6;       /* 可选：hover微微高亮 */
+}
 
 
 @media (max-width: 600px) {

@@ -7,5 +7,11 @@
   "score": "评分",
   "type": "类型",
   "address": "地址",
-  "detail": "详情"
+  "detail": "详情",
+  "login": "登录",
+  "logout": "退出",
+  "login_title": "用户登录",
+  "login_username": "用户名",
+  "login_password": "密码",
+  "login_required": "请输入用户名和密码"
 }

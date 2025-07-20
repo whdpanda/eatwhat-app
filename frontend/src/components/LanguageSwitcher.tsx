@@ -20,12 +20,7 @@ export default function LanguageSwitcher() {
   }, [langMenuOpen]);
 
   return (
-    <div style={{
-      position: 'absolute',
-      top: 30,
-      right: 30,
-      zIndex: 20
-    }}>
+    <div className="lang-switcher-root">
       <div
         className={`lang-switch${langMenuOpen ? ' open' : ''}`}
         onClick={e => {

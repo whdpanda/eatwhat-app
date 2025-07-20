@@ -7,5 +7,11 @@
   "score": "Rating",
   "type": "Type",
   "address": "Address",
-  "detail": "Detail"
+  "detail": "Detail",
+   "login": "Login",
+  "logout": "Logout",
+  "login_title": "User Login",
+  "login_username": "Username",
+  "login_password": "Password",
+  "login_required": "Please enter username and password"
 }
