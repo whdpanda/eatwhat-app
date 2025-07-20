@@ -4,25 +4,40 @@ import { useTranslation } from 'react-i18next';
 
 const USER_KEY = 'eatwhat_user';
 
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080'; // 可用 .env 控制
+
 const LoginPage: React.FC = () => {
   const { t } = useTranslation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [err, setErr] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-   async function handleLogin(e: React.FormEvent) {
+  async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
     setErr('');
-    // 这里你可以调用真实后端API
-    // const res = await fetch('/api/login', { ... });
-    // 示例：只要有内容就视为登录成功
-    if (username && password) {
-      localStorage.setItem(USER_KEY, JSON.stringify({ username }));
+    setLoading(true);
+    try {
+      const res = await fetch(`${API_URL}/api/login`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        setErr(data.error || t('login_failed'));
+        setLoading(false);
+        return;
+      }
+      const data = await res.json();
+      // 这里你可以把 token 存 localStorage，如果有的话
+      localStorage.setItem(USER_KEY, JSON.stringify({ username: data.username }));
       navigate('/');
-    } else {
-      setErr(t('login_required'));
+    } catch (e) {
+      setErr(t('login_failed'));
     }
+    setLoading(false);
   }
 
   return (
@@ -48,8 +63,8 @@ const LoginPage: React.FC = () => {
           />
         </div>
         {err && <div className="error-msg">{err}</div>}
-        <button type="submit" className="button-main" style={{ width: '100%' }}>
-          {t('login')}
+        <button type="submit" className="button-main" style={{ width: '100%' }} disabled={loading}>
+          {loading ? t('loading') : t('login')}
         </button>
       </form>
     </div>

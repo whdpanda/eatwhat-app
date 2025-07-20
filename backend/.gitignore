@@ -6,6 +6,9 @@ frontend/dist/
 # 后端 node_modules
 backend/node_modules/
 
+# 后端 db
+backend/db.json
+
 # 环境变量等敏感文件
 frontend/.env
 backend/.env
