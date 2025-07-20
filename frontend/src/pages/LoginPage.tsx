@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 const USER_KEY = 'eatwhat_user';
-
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080'; // 可用 .env 控制
+const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
 const LoginPage: React.FC = () => {
   const { t } = useTranslation();
@@ -31,7 +30,6 @@ const LoginPage: React.FC = () => {
         return;
       }
       const data = await res.json();
-      // 这里你可以把 token 存 localStorage，如果有的话
       localStorage.setItem(USER_KEY, JSON.stringify({ username: data.username }));
       navigate('/');
     } catch (e) {
@@ -39,6 +37,9 @@ const LoginPage: React.FC = () => {
     }
     setLoading(false);
   }
+
+  // 注册跳转
+  const handleRegister = () => navigate('/register');
 
   return (
     <div className="app-container" style={{ maxWidth: 320 }}>
@@ -63,9 +64,14 @@ const LoginPage: React.FC = () => {
           />
         </div>
         {err && <div className="error-msg">{err}</div>}
-        <button type="submit" className="button-main" style={{ width: '100%' }} disabled={loading}>
-          {loading ? t('loading') : t('login')}
-        </button>
+        <div className="login-actions">
+          <button type="submit" className="button-main" disabled={loading}>
+            {loading ? t('loading') : t('login')}
+          </button>
+          <button type="button" className="button-main" onClick={handleRegister}>
+            {t('register')}
+          </button>
+        </div>
       </form>
     </div>
   );
