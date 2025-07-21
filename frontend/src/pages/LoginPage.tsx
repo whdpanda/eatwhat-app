@@ -3,7 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const USER_KEY = "eatwhat_user";
-const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+// const API_URL = process.env.REACT_APP_API_URL || "http://localhost:8080";
+const API_URL = process.env.REACT_APP_API_URL || "https://api.randomeatwhat.com";
 
 const generateCaptcha = () => {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
