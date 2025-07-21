@@ -400,9 +400,55 @@ select:focus {
   outline: none;
 }
 
+.form-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  gap: 10px;
+}
+
+.budget-select, .currency-select {
+  margin-left: 6px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid #e6d6c5;
+  background: #fff;
+  font-size: 1rem;
+}
+
+.budget-select {
+  min-width: 90px;
+}
+
+.currency-select {
+  min-width: 90px;
+}
+
+@media (max-width: 600px) {
+  .form-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .budget-select, .currency-select {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+
 @media (max-width: 600px) {
   .app-container {
     padding: 16px 3vw;
     margin: 24px 0;
+  }
+    .form-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .budget-select, .currency-select {
+    width: 100%;
+    min-width: unset;
   }
 }

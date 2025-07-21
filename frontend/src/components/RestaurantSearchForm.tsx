@@ -1,21 +1,58 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
-const DISTANCE_OPTIONS = [
-  { label: "1km", value: 1000 },
-  { label: "3km", value: 3000 },
-  { label: "5km", value: 5000 },
-  { label: "10km", value: 10000 },
+// 币种选项
+const CURRENCY_OPTIONS = [
+  { code: "CNY", label: "CNY" },
+  { code: "USD", label: "USD" },
+  { code: "JPY", label: "JPY" },
+  { code: "EUR", label: "EUR" },
+  { code: "GBP", label: "GBP" },
 ];
 
-const PRICE_OPTIONS = [
-  { label: "", value: -1 },
-  { label: "¥1000", value: 1000 },
-  { label: "¥2000", value: 2000 },
-  { label: "¥3000", value: 3000 },
-  { label: "¥5000", value: 5000 },
-  { label: "¥10000", value: 10000 },
-];
+// 每种币种下预算选项
+const PRICE_OPTIONS_MAP: Record<string, { label: string; value: number }[]> = {
+  CNY: [
+    { label: "", value: -1 },
+    { label: "¥100", value: 100 },
+    { label: "¥200", value: 200 },
+    { label: "¥300", value: 300 },
+    { label: "¥500", value: 500 },
+    { label: "¥1000", value: 1000 },
+  ],
+  USD: [
+    { label: "", value: -1 },
+    { label: "$10", value: 10 },
+    { label: "$30", value: 30 },
+    { label: "$50", value: 50 },
+    { label: "$100", value: 100 },
+    { label: "$200", value: 200 }
+  ],
+  JPY: [
+    { label: "", value: -1 },
+    { label: "¥1000", value: 1000 },
+    { label: "¥2000", value: 2000 },
+    { label: "¥3000", value: 3000 },
+    { label: "¥5000", value: 5000 },
+    { label: "¥10000", value: 10000 },
+  ],
+  EUR: [
+    { label: "", value: -1 },
+    { label: "€10", value: 10 },
+    { label: "€30", value: 30 },
+    { label: "€50", value: 50 },
+    { label: "€100", value: 100 },
+    { label: "€200", value: 200 }
+  ],
+  GBP: [
+    { label: "", value: -1 },
+    { label: "£10", value: 10 },
+    { label: "£30", value: 30 },
+    { label: "£50", value: 50 },
+    { label: "£100", value: 100 },
+    { label: "£200", value: 200 }
+  ],
+};
 
 export type Restaurant = {
   name: string;
@@ -38,10 +75,14 @@ export default function RestaurantSearchForm({
 }: Props) {
   const { t } = useTranslation();
   const [distance, setDistance] = React.useState(1000);
+
+  // 新增币种 state
+  const [currency, setCurrency] = React.useState("CNY");
+  // 预算 state（随币种切换重置）
   const [price, setPrice] = React.useState(-1);
 
   const API_URL = "https://api.randomeatwhat.com";
-  //   const API_URL = 'http://localhost:8080'; // 本地开发时使用
+  // const API_URL = 'http://localhost:8080';
 
   function getLocation(): Promise<{ lat: number; lng: number }> {
     return new Promise((resolve, reject) => {
@@ -61,6 +102,11 @@ export default function RestaurantSearchForm({
     });
   }
 
+  // 切换币种时，重置预算为 -1
+  React.useEffect(() => {
+    setPrice(-1);
+  }, [currency]);
+
   async function handleRandom(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
@@ -76,6 +122,7 @@ export default function RestaurantSearchForm({
           longitude: lng,
           distance,
           price,
+          currency, // 将币种也发送到后端
         }),
       });
       if (!res.ok) throw new Error("API请求失败");
@@ -87,6 +134,9 @@ export default function RestaurantSearchForm({
     setLoading(false);
   }
 
+  // 当前币种的预算选项
+  const priceOptions = PRICE_OPTIONS_MAP[currency];
+
   return (
     <form className="restaurant-form" onSubmit={handleRandom}>
       <div className="form-item">
@@ -96,7 +146,12 @@ export default function RestaurantSearchForm({
             value={distance}
             onChange={(e) => setDistance(Number(e.target.value))}
           >
-            {DISTANCE_OPTIONS.map((opt) => (
+            {[
+              { label: "1km", value: 1000 },
+              { label: "3km", value: 3000 },
+              { label: "5km", value: 5000 },
+              { label: "10km", value: 10000 },
+            ].map((opt) => (
               <option key={opt.value} value={opt.value}>
                 {opt.label}
               </option>
@@ -110,15 +165,28 @@ export default function RestaurantSearchForm({
           <select
             value={price}
             onChange={(e) => setPrice(Number(e.target.value))}
+            className="budget-select"
           >
-            {PRICE_OPTIONS.map((opt) => (
+            {priceOptions.map((opt) => (
               <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+          <select
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+            className="currency-select"
+          >
+            {CURRENCY_OPTIONS.map((opt) => (
+              <option key={opt.code} value={opt.code}>
                 {opt.label}
               </option>
             ))}
           </select>
         </label>
       </div>
+
       <button type="submit" className="button-main form-button">
         {t("random")}
       </button>
