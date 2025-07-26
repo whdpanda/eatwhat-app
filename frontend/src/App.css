@@ -424,6 +424,87 @@ select:focus {
   min-width: 90px;
 }
 
+/* 验证页主容器 */
+.verify-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 32px 24px;
+  border: 1px solid #eee;
+  border-radius: 18px;
+  background: #fff8f3; /* 奶油色背景，与注册页一致 */
+  box-shadow: 0 6px 32px 0 rgba(255, 180, 130, 0.14);
+}
+
+.verify-title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* 表单结构与注册页一致 */
+.verify-form, .email-verification-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.verify-input {
+  padding: 12px;
+  font-size: 16px;
+  border: 1.5px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+}
+
+
+.verify-button {
+  background: linear-gradient(90deg, #fda085 0%, #f6d365 100%);
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 10px 38px;
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  margin-top: 8px;
+  transition: background 0.3s, box-shadow 0.2s, transform 0.13s;
+  box-shadow: 0 3px 12px 0 rgba(249, 130, 77, 0.12);
+}
+
+.verify-button:disabled {
+  background: #ffd6a0;
+  cursor: not-allowed;
+}
+
+.verify-error {
+  color: #ef4444;
+  text-align: center;
+  font-size: 14px;
+}
+.verify-success {
+  color: #22c55e;
+  text-align: center;
+  font-size: 14px;
+}
+
+.resend-btn {
+  background: none;
+  border: none;
+  color: #2d82ff;
+  text-decoration: underline;
+  font-size: 15px;
+  cursor: pointer;
+  margin: 0 auto 8px auto;
+  display: block;
+  padding: 0;
+}
+
+.resend-btn:disabled {
+  color: #9cb7dd;
+  cursor: not-allowed;
+}
+
 @media (max-width: 600px) {
   .form-item {
     flex-direction: column;

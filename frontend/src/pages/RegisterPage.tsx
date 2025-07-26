@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";  // 需要自动跳转
 import { useTranslation } from "react-i18next";
 
 // const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
@@ -8,20 +8,26 @@ const API_URL = process.env.REACT_APP_API_URL || 'https://api.randomeatwhat.com'
 const RegisterPage: React.FC = () => {
   const { t } = useTranslation();
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");         
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  const navigate = useNavigate();   // 启用路由跳转
+
+  // 简单邮箱格式校验
+  const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
-    setSuccess("");
 
-    if (!username || !password) {
-      setError(t("register.enter_username_password"));
+    if (!username || !email || !password) {
+      setError(t("register.enter_username_email_password"));
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setError(t("register.invalid_email"));
       return;
     }
     if (password.length < 6) {
@@ -38,14 +44,14 @@ const RegisterPage: React.FC = () => {
       const res = await fetch(`${API_URL}/api/register`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username, email, password }),
       });
       const data = await res.json();
       if (!res.ok) {
         setError(data.error || t("register.failed"));
       } else {
-        setSuccess(t("register.success"));
-        setTimeout(() => navigate("/login"), 3000);
+        // 注册成功后自动跳转到邮箱验证页面，带邮箱参数
+        navigate(`/verify-email?email=${encodeURIComponent(email)}`);
       }
     } catch {
       setError(t("register.network_error"));
@@ -67,6 +73,13 @@ const RegisterPage: React.FC = () => {
         />
         <input
           className="register-input"
+          type="email"
+          placeholder={t("register_email")}
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+        />
+        <input
+          className="register-input"
           type="password"
           placeholder={t("register_password")}
           value={password}
@@ -83,7 +96,6 @@ const RegisterPage: React.FC = () => {
           {loading ? t("register_loading") : t("register_submit")}
         </button>
         {error && <div className="register-error">{error}</div>}
-        {success && <div className="register-success">{success}</div>}
       </form>
       <div className="register-login-link">
         {t("register_has_account")}{" "}

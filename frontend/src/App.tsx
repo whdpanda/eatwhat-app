@@ -4,6 +4,7 @@ import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';  // 新增
+import VerifyEmailPage from './pages/VerifyEmailPage'; // 新增
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 
 function AppRoutes() {
@@ -18,6 +19,7 @@ function AppRoutes() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} /> {/* 新增注册路由 */}
+        <Route path="/verify-email" element={<VerifyEmailPage />} /> {/* 新增邮箱验证路由 */}
       </Routes>
     </div>
   );
