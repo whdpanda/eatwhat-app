@@ -1,6 +1,6 @@
 {
-  "title": "何食べる？おすすめツール",
-  "distance": "位置範囲",
+  "title": "何食べる？おすすめアプリ",
+  "distance": "距離範囲",
   "budget": "予算上限",
   "random": "ランダムおすすめ",
   "loading": "検索中...",
@@ -18,9 +18,13 @@
   "register_title": "ユーザー登録",
   "register_username": "ユーザー名",
   "register_password": "パスワード",
-  "register_password_repeat": "パスワード確認",
+  "register_password_repeat": "パスワード（確認）",
   "register_submit": "登録する",
   "register_has_account": "すでにアカウントをお持ちですか？",
   "register_to_login": "ログインへ",
-  "register_loading": "登録中..."
+  "register_loading": "登録中...",
+  "captcha_placeholder": "認証コードを入力してください",
+  "verify_email_title": "メール認証",
+  "verify_input_code": "認証コードを入力してください",
+  "verify_submit": "認証する"
 }

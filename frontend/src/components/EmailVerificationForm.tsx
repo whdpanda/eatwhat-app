@@ -85,7 +85,7 @@ const EmailVerificationForm: React.FC<EmailVerificationFormProps> = ({
       <input
         className="verify-input"
         type="text"
-        placeholder={t("verify.input_code")}
+        placeholder={t("verify_input_code")}
         value={code}
         onChange={e => setCode(e.target.value)}
         disabled={disabled}
@@ -95,7 +95,7 @@ const EmailVerificationForm: React.FC<EmailVerificationFormProps> = ({
         type="submit"
         disabled={loading || disabled}
       >
-        {loading ? t("verify.loading") : t("verify.submit")}
+        {loading ? t("verify.loading") : t("verify_submit")}
       </button>
       {/* <button type="button" className="resend-btn" onClick={handleResend} disabled={loading}>
         {t("verify.resend_code")}

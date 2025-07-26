@@ -22,5 +22,9 @@
   "register_submit": "提交",
   "register_has_account": "已有账号？",
   "register_to_login": "去登录",
-  "register_loading": "注册中..."
+  "register_loading": "注册中...",
+  "captcha_placeholder": "请输入验证码",
+  "verify_email_title": "邮箱验证",
+  "verify_input_code": "请输入验证码",
+  "verify_submit": "提交验证"
 }

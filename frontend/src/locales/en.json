@@ -1,5 +1,5 @@
 {
-  "title": "EatWhat Recommender",
+  "title": "What to Eat Recommender",
   "distance": "Distance Range",
   "budget": "Budget Limit",
   "random": "Random Recommend",
@@ -14,7 +14,7 @@
   "login_title": "User Login",
   "login_username": "Username",
   "login_password": "Password",
-  "login_required": "Please enter username and password",
+  "login_required": "Please enter your username and password",
   "register_title": "User Registration",
   "register_username": "Username",
   "register_password": "Password",
@@ -22,5 +22,9 @@
   "register_submit": "Submit",
   "register_has_account": "Already have an account?",
   "register_to_login": "Go to Login",
-  "register_loading": "Registering..."
+  "register_loading": "Registering...",
+  "captcha_placeholder": "Enter the verification code",
+  "verify_email_title": "Email Verification",
+  "verify_input_code": "Enter the verification code",
+  "verify_submit": "Verify"
 }
